@@ -140,7 +140,34 @@ fastlaneをCI環境で利用する際に必要になる以下の環境変数を�
 (keychainのパスワード。CircleCIの場合は`circle`)
 ![環境変数入力画面](resources/MATCH_PASSWORD.png)
 
-### user keyの設定
+## user keyの設定
 通常、CircleCIなどのCIサーバから複数のプライベートリポジトリへのアクセスは許可されていません。  
 そのため、user keyを設定し、GitHubのユーザーとして複数のプライベートリポジトリへのアクセスを可能にします(2つのリポジトリに対してread権限のみを持つユーザーが望ましいです)
 ![user keyを設定](resources/user_key.png)
+
+ここまで完了した段階でビルドを実行すると、CircleCI上で.ipaファイルが作成できるようになっていると思います。
+
+## DeployGateでの配布
+CircleCI上で.ipaファイルが作成できるようになったので、それをDeployGateで配布してみます。
+Fastfileのbeta laneを以下のように編集します。  
+(`DEPLOYGATE_API_TOKEN`、`DEPLOYGATE_USER`は環境変数として定義します)
+
+```
+platform :ios do
+  desc "distribute latest app ipa via DeployGate"
+  lane :beta do
+    // AdHoc用の証明書、Provisioning Profileをダウンロード、インストール
+    match(type: 'adhoc')
+    // AdHoc用のipaファイルをビルド
+    gym(export_method: 'ad-hoc')
+    deploygate(api_token: DEPLOYGATE_API_TOKEN,
+               user: DEPLOYGATE_USER,
+               message: "fastlane study test message")
+  end
+end
+```
+![DeployGate](resources/DeployGate.png)
+※ user, api_tokenはDeployGateのアカウント設定画面に表示されています。
+
+これをpushし、CircleCIで実行することで、CircleCI上での自動ビルド&自動配布が実現できました。  
+お疲れさまでした！

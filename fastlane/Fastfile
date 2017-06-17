@@ -25,5 +25,8 @@ platform :ios do
   lane :beta do
     match(type: "adhoc")
     gym(export_method: "ad-hoc")
+    deploygate(api_token: ENV['DEPLOYGATE_API_TOKEN'],
+               user: ENV['DEPLOYGATE_USER'],
+               message: "fastlane study test message")
   end
 end
