@@ -96,8 +96,7 @@
 				TargetAttributes = {
 					736B097B1EF4A69F009A0B32 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5GKRYZ5VBH;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -261,11 +260,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5GKRYZ5VBH;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = fastlaneSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nerd0geek1.fastlaneSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -274,11 +274,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5GKRYZ5VBH;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 3BTPVJ437E;
 				INFOPLIST_FILE = fastlaneSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nerd0geek1.fastlaneSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "72988a56-fb89-42cb-9485-0634997d836f";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.nerd0geek1.fastlaneSample";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -302,6 +305,7 @@
 				736B09901EF4A69F009A0B32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
