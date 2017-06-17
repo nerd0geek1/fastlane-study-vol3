@@ -109,7 +109,7 @@ CircleCIでは、Ubuntuがデフォルトのビルドイメージになってい
 ```
 machine:
   xcode:
-    version: '8.3.2'
+    version: '8.3.3'
   environment:
     override:
     LANG: en_US.UTF-8
