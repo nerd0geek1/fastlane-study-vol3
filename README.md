@@ -1,7 +1,8 @@
 ## iOSプロジェクトの作成
 Xcodeで適当なbundle identifierを持つ適当なプロジェクトを作成してください。  
 (既存のプロジェクトと被らないようなbundle identifierで)
-Xcodeのプロジェクト作成完了後、`git init`で初期化してください。
+Xcodeのプロジェクト作成完了後、`git init`で初期化してください。  
+![新規プロジェクト](./resources/Xcode_new_project.png)
 
 ## ruby環境の構築(必要に応じて)
 fastlaneを動かすruby環境を構築するために、rbenvを利用します。
@@ -45,6 +46,11 @@ $ bundle install --path vendor/bundle
 matchが生成・更新・管理する証明書やProvisioning Profileを格納するためのリポジトリを作成します。  
 証明書、Provisioning Profileを格納するため、絶対に**Private**であることを確認してください。
 
+## fastlaneのセットアップ
+`bundle exec fastlane...`を実行する度にAppleIDやbundle identifierを何度も入力するのが面倒なので、このタイミングで`fastlane init`を実行し、Appfileを生成するようにします。
+```
+$ bundle exec fastlane init
+```
 
 ## iOSプロジェクトのディレクトリでmatchのセットアップ
 一番最初に作成したiOSプロジェクトのディレクトリでmatchを使用する準備を行います。
@@ -55,15 +61,9 @@ $ bundle exec fastlane match init
 これにより、証明書、Provisioning Profileの更新があった際に  
 match用のリポジトリに証明書、Provisioning Profileがpushされるようになります。
 
-## fastlaneのセットアップ
-`bundle exec fastlane...`を実行する度にAppleIDやbundle identifierを何度も入力するのが面倒なので、  
-このタイミングで`fastlane init`を実行し、Appfileを生成するようにします。
-```
-$ bundle exec fastlane init
-```
-
 ## matchで証明書、Provisioning Profileの作成
-準備が整ったので、以下のコマンドでAdHoc用の証明書、Provisioning Profileを作成します。
+準備が整ったので、以下のコマンドでAdHoc用の証明書、Provisioning Profileを作成します。  
+このタイミングで証明書、Provisioning Profileを暗号化するためのpassphraseを入力しますが、これはCircleCI上でファイルを復号する際に必要になりますので、忘れないようにしてください。
 ```
 $ bundle exec fastlane match adhoc
 ```
@@ -100,8 +100,12 @@ $ bundle exec fastlane beta
 ## CircleCIへのデプロイを準備
 fastlaneをCircleCI上で実行するための準備を行います。
 
+### ビルドイメージをUbuntuからOS Xに変更
+CircleCIでは、Ubuntuがデフォルトのビルドイメージになっていますので、まずこれをOS Xに変更します。
+![ビルドイメージを変更](resources/build_image.png)
+
 ### circle.ymlをセットアップ
-まずはcircle.ymlを作成し、以下の内容を記述します。
+次にcircle.ymlを作成し、以下の内容を記述します。
 ```
 machine:
   xcode:
@@ -134,3 +138,9 @@ fastlaneをCI環境で利用する際に必要になる以下の環境変数を�
 (CircleCI特有。CircleCIがデフォルトのkeychainを`circle.keychain`としているため。)
 - MATCH_KEYCHAIN_PASSWORD  
 (keychainのパスワード。CircleCIの場合は`circle`)
+![環境変数入力画面](resources/MATCH_PASSWORD.png)
+
+### user keyの設定
+通常、CircleCIなどのCIサーバから複数のプライベートリポジトリへのアクセスは許可されていません。  
+そのため、user keyを設定し、GitHubのユーザーとして複数のプライベートリポジトリへのアクセスを可能にします(2つのリポジトリに対してread権限のみを持つユーザーが望ましいです)
+![user keyを設定](resources/user_key.png)
