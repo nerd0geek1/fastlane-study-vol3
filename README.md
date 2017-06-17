@@ -74,7 +74,9 @@ $ bundle exec fastlane match adhoc
 Keychain Accessにも秘密鍵、証明書が取り込まれた状態になります。
 
 ## matchを利用してipaを生成するlaneの作成
-`bundle exec fastlane init`で生成されたFastfileの内容のうち、以下の内容のみを残すように編集します。
+`bundle exec fastlane init`で生成されたFastfileについて、以下の内容のみを残すように編集します。  
+また、Auto Signingが有効になっていると、コマンドライン経由でのアーカイブに失敗するため、このタイミングでAuto Signingをオフにしておきます。
+![Auto Signing off](resources/turn_off_auto_signing.png)
 
 ```
 default_platform :ios
