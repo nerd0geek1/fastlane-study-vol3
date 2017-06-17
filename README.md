@@ -1,9 +1,10 @@
-## iOSプロジェクトの作成
+# iOSプロジェクトの作成
 Xcodeで適当なbundle identifierを持つ適当なプロジェクトを作成してください。  
 (既存のプロジェクトと被らないようなbundle identifierで)
 Xcodeのプロジェクト作成完了後、`git init`で初期化してください。  
 ![新規プロジェクト](./resources/Xcode_new_project.png)
 
+# fastlaneのセットアップ
 ## ruby環境の構築(必要に応じて)
 fastlaneを動かすruby環境を構築するために、rbenvを利用します。
 
@@ -42,6 +43,7 @@ bunlderがインストールされたので、Gemfile.lockから
 $ bundle install --path vendor/bundle
 ```
 
+# iOSプロジェクトへのfastlaneの適用
 ## match用のリポジトリを作成
 matchが生成・更新・管理する証明書やProvisioning Profileを格納するためのリポジトリを作成します。  
 証明書、Provisioning Profileを格納するため、絶対に**Private**であることを確認してください。
@@ -71,7 +73,7 @@ $ bundle exec fastlane match adhoc
 これを実行することで、Apple Developer Center上に証明書とProvisioning Profileが作成され、  
 Keychain Accessにも秘密鍵、証明書が取り込まれた状態になります。
 
-## matchを利用したFastfileの作成
+## matchを利用してipaを生成するlaneの作成
 `bundle exec fastlane init`で生成されたFastfileの内容のうち、以下の内容のみを残すように編集します。
 
 ```
@@ -96,7 +98,7 @@ end
 ```
 $ bundle exec fastlane beta
 ```
-
+# CircleCIへのデプロイ
 ## CircleCIへのデプロイを準備
 fastlaneをCircleCI上で実行するための準備を行います。
 
