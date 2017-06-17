@@ -135,7 +135,7 @@ fastlaneをCI環境で利用する際に必要になる以下の環境変数を�
 - FASTLANE_PASSWORD  
 (matchが必要に応じてiOS Developer Centerにアクセスするために必要)
 - MATCH_KEYCHAIN_NAME  
-(CircleCI特有。CircleCIがデフォルトのkeychainを`circle.keychain`としているため。)
+(CircleCI特有。CircleCIがデフォルトのkeychainを`circle.keychain`としているため、`circle`と設定する必要がある。)
 - MATCH_KEYCHAIN_PASSWORD  
 (keychainのパスワード。CircleCIの場合は`circle`)
 ![環境変数入力画面](resources/MATCH_PASSWORD.png)
