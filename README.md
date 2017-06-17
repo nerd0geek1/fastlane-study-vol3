@@ -46,7 +46,8 @@ $ bundle install --path vendor/bundle
 # iOSプロジェクトへのfastlaneの適用
 ## match用のリポジトリを作成
 matchが生成・更新・管理する証明書やProvisioning Profileを格納するためのリポジトリを作成します。  
-証明書、Provisioning Profileを格納するため、絶対に**Private**であることを確認してください。
+証明書、Provisioning Profileを格納するため、
+# **絶対にPrivateであることを確認してください。**
 
 ## fastlaneのセットアップ
 `bundle exec fastlane...`を実行する度にAppleIDやbundle identifierを何度も入力するのが面倒なので、このタイミングで`fastlane init`を実行し、Appfileを生成するようにします。
