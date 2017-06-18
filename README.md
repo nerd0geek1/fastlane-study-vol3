@@ -152,16 +152,35 @@ fastlaneをCI環境で利用する際に必要になる以下の環境変数を�
 ### GitHubの場合
 各プロジェクトの編集画面(歯車のアイコン)を選択し、プロジェクト編集画面へ遷移  
 →`PERMISSIONS > Checkout SSH keys`を選択し、`Authorize with GitHub`をクリック
-![GitHub user keyの選択1](resources/github_user_key_1.png)
+![GitHub user keyの設定1](resources/github_user_key_1.png)
+
 `Create and add USERNAME user key`をクリック
-![GitHub user keyの選択2](resources/github_user_key_2.png)
+![GitHub user keyの設定2](resources/github_user_key_2.png)
+
 user keyが追加されたことを確認
-![GitHub user keyの選択3](resources/github_user_key_3.png)
+![GitHub user keyの設定3](resources/github_user_key_3.png)
 
 ここまで完了した段階でビルドを実行すると、CircleCI上で.ipaファイルが作成できるようになっていると思います。
 
 ### Bitbucketの場合
+各プロジェクトの編集画面(歯車のアイコン)を選択し、プロジェクト編集画面へ遷移  
+→`PERMISSIONS > Checkout SSH keys`を選択し、画面を右クリック  
+`Inspect Element`を選択
+![Bitbucket user keyの設定1](resources/bitbucket_user_key_1.png)
 
+Networkタブの選択後、`Create Username user key` をクリック
+![Bitbucket user keyの設定2](resources/bitbucket_user_key_2.png)
+
+ネットワークタブから、`checkout-key`を選択し、生成されたuser keyの公開鍵をコピー
+![Bitbucket user keyの設定3](resources/bitbucket_user_key_3.png)
+
+Bitbucketの設定画面へ遷移し、`SSH keys > Add Key`からコピーした公開鍵を登録
+![Bitbucket user keyの設定4](resources/bitbucket_user_key_4.png)
+
+SSH Keysに公開鍵が登録されたことを確認
+![Bitbucket user keyの設定5](resources/bitbucket_user_key_5.png)
+
+ここまで完了した段階でビルドを実行すると、CircleCI上で.ipaファイルが作成できるようになっていると思います。
 
 ## DeployGateでの配布
 CircleCI上で.ipaファイルが作成できるようになったので、それをDeployGateで配布してみます。
