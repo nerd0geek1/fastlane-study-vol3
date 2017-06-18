@@ -147,10 +147,21 @@ fastlaneをCI環境で利用する際に必要になる以下の環境変数を�
 
 ## user keyの設定
 通常、CircleCIなどのCIサーバから複数のプライベートリポジトリへのアクセスは許可されていません。  
-そのため、user keyを設定し、GitHubのユーザーとして複数のプライベートリポジトリへのアクセスを可能にします(2つのリポジトリに対してread権限のみを持つユーザーが望ましいです)
-![user keyを設定](resources/user_key.png)
+そのため、user keyを設定し、ホスティングサービスののユーザーとして複数のプライベートリポジトリへのアクセスを可能にします(2つのリポジトリに対してread権限のみを持つユーザーが望ましいです)
+
+### GitHubの場合
+各プロジェクトの編集画面(歯車のアイコン)を選択し、プロジェクト編集画面へ遷移  
+→`PERMISSIONS > Checkout SSH keys`を選択し、`Authorize with GitHub`をクリック
+![GitHub user keyの選択1](resources/github_user_key_1.png)
+`Create and add USERNAME user key`をクリック
+![GitHub user keyの選択2](resources/github_user_key_2.png)
+user keyが追加されたことを確認
+![GitHub user keyの選択3](resources/github_user_key_3.png)
 
 ここまで完了した段階でビルドを実行すると、CircleCI上で.ipaファイルが作成できるようになっていると思います。
+
+### Bitbucketの場合
+
 
 ## DeployGateでの配布
 CircleCI上で.ipaファイルが作成できるようになったので、それをDeployGateで配布してみます。
@@ -176,3 +187,9 @@ end
 
 これをpushし、CircleCIで実行することで、CircleCI上での自動ビルド&自動配布が実現できました。  
 お疲れさまでした！
+
+## 参考
+- [nerd0geek1/fastlane-study-vol1 - GitHub](https://github.com/nerd0geek1/fastlane-study-vol1)
+- [Test iOS applications on macOS - CircleCI](https://circleci.com/docs/1.0/ios-builds-on-os-x/)
+- [Set up code signing for iOS projects - CircleCI](https://circleci.com/docs/1.0/ios-code-signing/)
+- [Setting an SSH key for bitbucket - CircleCI discuss](https://discuss.circleci.com/t/setting-an-ssh-key-for-bitbucket/12829/10)
